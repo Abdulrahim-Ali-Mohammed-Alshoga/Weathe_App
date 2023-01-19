@@ -7,6 +7,7 @@ import 'package:weather_app/data/repository/city_weather_repository.dart';
 import 'package:weather_app/data/web_services/city_weather_web_service.dart';
 import 'package:weather_app/presntation/screens/List_saved_areas_screen.dart';
 import 'package:weather_app/presntation/screens/frist_page.dart';
+import 'package:weather_app/presntation/screens/search_screen.dart';
 import 'package:weather_app/presntation/screens/setting_screen.dart';
 
 import 'animate_route.dart';
@@ -34,10 +35,10 @@ class RouteApp {
                 isSelectedPressure: settingArgument.pressure),
             rightOrleft: 1.0,
             topOrBottom: 0.0);
-      case NamePage.listSavedAreas:
+      case NamePage.searchScreen:
         return AnimateRoute(
-            page: const ListSavedAreasScreen(),
-            rightOrleft: -1.0,
+            page: const SearchScreen(),
+            rightOrleft: 02.0,
             topOrBottom: 0.0);
     }
     return null;

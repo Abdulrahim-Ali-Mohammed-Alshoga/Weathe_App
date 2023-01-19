@@ -31,8 +31,9 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Weather Live',
           debugShowCheckedModeBanner: false,
+          color: const Color(0xfff0f0f0),
           onGenerateRoute: routeApp.generateRoute,
           theme: ThemeData(
             primarySwatch: Colors.blue,
