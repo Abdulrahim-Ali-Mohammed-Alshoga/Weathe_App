@@ -2,9 +2,9 @@ class CityWeather{
   late int id;
   late String nameCity;
   late double temperature;
-  late double temperatureMax;
-  late double temperatureMin;
   late double windSpeed;
+  late int humidity;
+  late int pressure;
   late String description;
   late String icon;
 
@@ -12,8 +12,8 @@ class CityWeather{
     id = json['id'];
     nameCity = json['name'];
     temperature = json['main']['temp'];
-    temperatureMin = json['main']['temp_min'];
-    temperatureMax = json['main']['temp_max'];
+    pressure = json['main']['pressure'];
+    humidity = json['main']['humidity'];
     windSpeed = json['wind']['speed'];
     description = json['weather'][0]['description'];
     icon = json['weather'][0]['icon'];

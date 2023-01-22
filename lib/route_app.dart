@@ -35,11 +35,12 @@ class RouteApp {
                 isSelectedPressure: settingArgument.pressure),
             rightOrleft: 1.0,
             topOrBottom: 0.0);
+      case NamePage.listSavedAreas:
+        return AnimateRoute(
+            page: ListSavedAreasScreen(), rightOrleft: -1.0, topOrBottom: 0.0);
       case NamePage.searchScreen:
         return AnimateRoute(
-            page: const SearchScreen(),
-            rightOrleft: 02.0,
-            topOrBottom: 0.0);
+            page: const SearchScreen(), rightOrleft: 0.0, topOrBottom: 0.0);
     }
     return null;
   }

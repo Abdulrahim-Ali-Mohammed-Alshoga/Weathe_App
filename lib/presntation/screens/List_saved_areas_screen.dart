@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/name_pages.dart';
 
 class ListSavedAreasScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context,NamePage.searchScreen);
+                  Navigator.pushNamed(context, NamePage.searchScreen);
                 },
                 icon: const Icon(
                   Icons.search,
@@ -34,19 +35,91 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
         body: Container(
           color: Colors.white,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 120,
                 color: Colors.blueAccent,
                 child: Stack(
                   fit: StackFit.expand,
-                  children: [Positioned(
-                      top: 15,left: 15,child: Text("Current location",style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 18
-                  ),))],
+                  children: const [
+                    Positioned(
+                        top: 15,
+                        left: 15,
+                        child: Text(
+                          "Current location",
+                          style: TextStyle(color: Colors.grey, fontSize: 18),
+                        )),
+                  ],
                 ),
-              )
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30.h, left: 18.w),
+                child: Text(
+                  "Favorites",
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30.h, left: 18.w),
+                child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                  TextSpan(
+                    text: "Add a city, area or specific address to your ",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15.sp,
+                    ),
+                  ),
+                  TextSpan(
+                      text: "Favorites ",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                      )),
+                  TextSpan(
+                      text:
+                          "to quickly see what the that the weather is like there.",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15.sp,
+                      )),
+                ])),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 30.h, left: 18.w),
+                child: FittedBox(
+                  child: Text(
+                    "To add Favorites. first search for them, view their forecast",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 13.sp,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 18.w),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "and then tap",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13.sp,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ));

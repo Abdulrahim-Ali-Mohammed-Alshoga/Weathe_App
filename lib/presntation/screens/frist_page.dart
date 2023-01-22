@@ -11,6 +11,7 @@ import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
 
 import '../../constants/arguments.dart';
 import '../../constants/hive_name.dart';
+import '../widgets/information_weather_widget.dart';
 import '../widgets/my_box_shadow_painter.dart';
 
 class FirstPage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _FirstPageState extends State<FirstPage> {
     isSelectedWind = box.get(HiveName.windSettingBD,
         defaultValue: SettingHive({'m/s': true, "km/h": false}, "m/s"))!;
     isSelectedPressure = box.get(HiveName.pressureSettingBD,
-        defaultValue: SettingHive({'mmHg': true, "hPa": false}, "mmHg"))!;
+        defaultValue: SettingHive({'mmHg': false, "hPa": true}, "hPa"))!;
   }
 
   Widget build(BuildContext context) {
@@ -49,7 +50,9 @@ class _FirstPageState extends State<FirstPage> {
         builder: (context, state) {
           if (state is CityWeatherSuccess) {
             cityWeather =
-                BlocProvider.of<CityWeatherCubit>(context).cityWeather[0];
+            BlocProvider
+                .of<CityWeatherCubit>(context)
+                .cityWeather[0];
             print(cityWeather.icon);
             return Container(
               color: Colors.white,
@@ -58,7 +61,7 @@ class _FirstPageState extends State<FirstPage> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 15.w, top: 40.h, right: 15.w),
+                    EdgeInsets.only(left: 15.w, top: 40.h, right: 15.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -77,20 +80,30 @@ class _FirstPageState extends State<FirstPage> {
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(NamePage.settingScreen,
-                                    arguments: SettingArgument(
-                                      temperature:
-                                          isSelectedTemperature.selectSetting,
-                                      wind: isSelectedWind.selectSetting,
-                                      pressure:
-                                          isSelectedPressure.selectSetting,
-                                    ))
-                                .then((value) => setState(() {
-                                      isSelectedTemperature = box
-                                          .get(HiveName.temperatureSettingBD)!;
-                                      // isSelectedPressure = box.get(HiveName.pressureSettingBD)!;
-                                      isSelectedWind =
-                                          box.get(HiveName.windSettingBD)!;
-                                    }));
+                                arguments: SettingArgument(
+                                  temperature:
+                                  isSelectedTemperature.selectSetting,
+                                  wind: isSelectedWind.selectSetting,
+                                  pressure:
+                                  isSelectedPressure.selectSetting,
+                                ))
+                                .then((value) =>
+                                setState(() {
+                                  isSelectedTemperature = box?.get(
+                                      HiveName.temperatureSettingBD) ??
+                                      SettingHive(
+                                          {'C': false, "F": true}, "F");
+                                  isSelectedPressure = box?.get(
+                                      HiveName.pressureSettingBD) ??
+                                      SettingHive(
+                                          {'mmHg': false, "hPa": true},
+                                          "hpa");
+                                  isSelectedWind =
+                                      box?.get(HiveName.windSettingBD) ??
+                                          SettingHive(
+                                              {'m/s': true, "km/h": false},
+                                              "m/s");
+                                }));
                           },
                           child: const Icon(
                             Icons.settings_outlined,
@@ -102,14 +115,15 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                   Stack(
                     alignment: Alignment.bottomCenter,
-                    fit: StackFit.loose,
+                    clipBehavior: Clip.none,
                     children: [
                       CustomPaint(
-                        painter: MyBoxShadowPainter(),
+                        painter: MyBoxShadowPainter(cityWeather.icon
+                            .substring(0, cityWeather.icon.length - 1)),
                         child: ClipPath(
                           clipper: MyCustomClipper(),
                           child: Container(
-                            height: 300,
+                            height: 280,
                             color: Colors.white,
                             // decoration: BoxDecoration(boxShadow: [
                             //   BoxShadow(
@@ -133,43 +147,78 @@ class _FirstPageState extends State<FirstPage> {
                         ),
                       ),
                       Positioned(
-                        bottom: 180,
+                        bottom: 185,
                         child: Text("Today",
                             style: TextStyle(
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.normal)),
                       ),
                       Positioned(
-                        bottom: 17,
+                        bottom: 15,
                         child: Image.asset(
-                          "assets/images/${cityWeather.icon.substring(0, cityWeather.icon.length - 1)}d.png",
+                          "assets/images/${cityWeather.icon.substring(
+                              0, cityWeather.icon.length - 1)}d.png",
                           height: 140.h,
-                          width: 150.w,
+                          width: 140.w,
                         ),
                       ),
                     ],
                   ),
                   Padding(
-                      padding: EdgeInsets.only(top: 10.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            isSelectedTemperature.typeSetting == "F"
-                                ? double.parse(
-                                        "${(cityWeather.temperature - 273) * 9 / 5 + 32}")
-                                    .toInt()
-                                    .toString()
-                                : double.parse(
-                                        "${cityWeather.temperature - 273}")
-                                    .toInt()
-                                    .toString(),
-                            style: TextStyle(
-                                fontSize: 55.sp, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      )),
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Center(
+                      child: Text(
+                        isSelectedTemperature.typeSetting == "F"
+                            ? "${double.parse(
+                            "${(cityWeather.temperature - 273) * 9 / 5 + 32}")
+                            .toInt()}F"
+                            : "${double.parse(
+                            "${cityWeather.temperature - 273}").toInt()}C"
+                            .toString(),
+                        style: TextStyle(
+                            fontSize: 40.sp, fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(cityWeather.description,
+                        style: TextStyle(
+                            fontSize: 26.sp, fontWeight: FontWeight.normal)),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 50.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InformationWeatherWidget(
+                            image: "assets/images/windspeed1.png",
+                            humidity: isSelectedWind.typeSetting == "m/s"
+                                ? "${cityWeather.windSpeed}"
+                                : "${(cityWeather.windSpeed * 3.6)
+                                .toInt()}", unit: isSelectedWind.typeSetting == "m/s"
+                            ?"m/s":"Km/h",
+                            good: cityWeather.icon
+                                .substring(0, cityWeather.icon.length - 1)),
+                        InformationWeatherWidget(
+                            image: "assets/images/pressure1.png",
+                            humidity: isSelectedPressure.typeSetting == "hPa"
+                                ? "${cityWeather.pressure}"
+                                : "${(cityWeather.pressure * 0.75)
+                                .toInt()}",
+                            unit: isSelectedPressure.typeSetting == "hPa"
+                                ? "hPa":"mmHg" ,
+                            good: cityWeather.icon
+                                .substring(0, cityWeather.icon.length - 1)),
+                        InformationWeatherWidget(
+                            image: "assets/images/humidity12.png",
+                            humidity: "${cityWeather.humidity}",
+                            unit: "%",
+                            good: cityWeather.icon
+                                .substring(0, cityWeather.icon.length - 1))
+                      ],
+                    ),
+                  ),
                   Container(
                     color: Colors.deepOrange,
                   ),
@@ -201,12 +250,12 @@ class _FirstPageState extends State<FirstPage> {
                         onTap: () {
                           Navigator.of(context)
                               .pushNamed(NamePage.settingScreen,
-                                  arguments: SettingArgument(
-                                    temperature:
-                                        isSelectedTemperature.selectSetting,
-                                    wind: isSelectedWind.selectSetting,
-                                    pressure: isSelectedPressure.selectSetting,
-                                  ));
+                              arguments: SettingArgument(
+                                temperature:
+                                isSelectedTemperature.selectSetting,
+                                wind: isSelectedWind.selectSetting,
+                                pressure: isSelectedPressure.selectSetting,
+                              ));
                         },
                         child: const Icon(
                           Icons.settings_outlined,
@@ -217,7 +266,7 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                 ),
                 CustomPaint(
-                  painter: MyBoxShadowPainter(),
+                  painter: MyBoxShadowPainter("01"),
                   child: ClipPath(
                     clipper: MyCustomClipper(),
                     child: Container(
