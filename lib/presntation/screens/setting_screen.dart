@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:weather_app/bussness_logc/cubit/theme/theme_cubit.dart';
 
 import '../../constants/hive_name.dart';
+import '../../constants/my_colors.dart';
 import '../../data/models/hive_models/setting_hive.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -22,31 +25,33 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  late int numberSelectRadio;
+   int numberSelectRadio=0;
 
   var box = Hive.box<SettingHive>(HiveName.settingBD);
-  var themeBox = Hive.box(HiveName.themeDB);
+  var themeBox = Hive.box(HiveNameTheme.themeDB);
+
+  changeTheme(int typeTheme) {
+    BlocProvider.of<ThemeCubit>(context).changeTheme(typeTheme);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    numberSelectRadio=  themeBox.get(HiveName.radioSettingBD,defaultValue: 0);
+    numberSelectRadio=  BlocProvider.of<ThemeCubit>(context).getTheme();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
-          title: const Text("Setting", style: TextStyle(color: Colors.black)),
+          title: const Text("Setting"),
           elevation: 1,
           leading: const BackButton(color: Colors.deepOrange),
-          backgroundColor: Colors.white,
+
         ),
-        body: Container(
-          color: Colors.grey.shade100,
-          width: double.infinity,
-          height: double.infinity,
-          child: Column(
+        body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -56,7 +61,8 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               Container(
                 height: 180,
-                color: Colors.white,
+                color:Theme.of(context).appBarTheme.backgroundColor,
+
                 child: Column(
                   children: [
                     Expanded(
@@ -70,8 +76,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     Divider(height: 0.h, thickness: .5),
                     Expanded(
                         flex: 1,
-                        child: toggleButtonsWidget("Wind Speed", "m/s", "km/h",
-                            widget.isSelectedWind.cast(), HiveName.windSettingBD)),
+                        child: toggleButtonsWidget(
+                            "Wind Speed",
+                            "m/s",
+                            "km/h",
+                            widget.isSelectedWind.cast(),
+                            HiveName.windSettingBD)),
                     Divider(height: 0.h, thickness: .5),
                     Expanded(
                         flex: 1,
@@ -91,7 +101,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               Container(
                 height: 170,
-                color: Colors.white,
+               color:Theme.of(context).appBarTheme.backgroundColor,
                 child: Column(
                   children: [
                     Expanded(
@@ -109,7 +119,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             setState(() {
                               numberSelectRadio = changed!;
 
-                               themeBox.put(HiveName.radioSettingBD,changed );
+                              changeTheme(0);
                             });
                           }),
                     ),
@@ -127,7 +137,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           onChanged: (int? changed) {
                             setState(() {
                               numberSelectRadio = changed!;
-                              themeBox.put(HiveName.radioSettingBD,changed );
+                              changeTheme(1);
                             });
                           }),
                     ),
@@ -139,13 +149,16 @@ class _SettingScreenState extends State<SettingScreen> {
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 12.w),
                           activeColor: Colors.deepOrange,
+                          selectedTileColor:Colors.grey,
+
+
                           title: const Text("System"),
                           value: 2,
                           groupValue: numberSelectRadio,
                           onChanged: (int? changed) {
                             setState(() {
                               numberSelectRadio = changed!;
-                              themeBox.put(HiveName.radioSettingBD,changed );
+                              changeTheme(2);
                             });
                           }),
                     ),
@@ -154,7 +167,7 @@ class _SettingScreenState extends State<SettingScreen> {
               )
             ],
           ),
-        ));
+        );
   }
 
   Widget toggleButtonsWidget(String nameListTile, String nameButtonOne,
@@ -166,18 +179,18 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: const EdgeInsets.symmetric(vertical: 11),
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(7)),
           child: ToggleButtons(
             // renderBorder: false,
             borderRadius: BorderRadius.circular(7),
-            renderBorder: false,
-            isSelected: isSelect.values.toList(),
             color: Colors.grey,
             splashColor: Colors.transparent,
             selectedColor: Colors.white,
             fillColor: Colors.deepOrange,
-            onPressed: (index) {
+            renderBorder: false,
+            isSelected: isSelect.values.toList(),
+            onPressed: (index) async {
               for (var i = 0; i < isSelect.length; i++) {
                 if (i == index) {
                   isSelect.update(isSelect.keys.toList()[i], (value) => true);
@@ -185,7 +198,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 } else {
                   isSelect.update(isSelect.keys.toList()[i], (value) => false);
                 }
-                box.put(nameHive, SettingHive(isSelect, selectType));
+                await box.put(nameHive, SettingHive(isSelect, selectType));
                 print(selectType);
                 setState(() {});
               }

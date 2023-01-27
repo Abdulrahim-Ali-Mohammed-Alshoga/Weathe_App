@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bussness_logc/city_weather_state.dart';
+
 import 'package:weather_app/data/models/city_weather.dart';
 import 'package:weather_app/data/repository/city_weather_repository.dart';
+
+import 'city_weather_state.dart';
 
 class CityWeatherCubit extends Cubit<CityWeatherState>{
   CityWeatherCubit(this.cityWeatherRepository):super(CityWeatherInitialState());

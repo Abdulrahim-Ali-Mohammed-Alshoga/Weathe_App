@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/bussness_logc/city_weather_cubit.dart';
+
 import 'package:weather_app/constants/arguments.dart';
 import 'package:weather_app/constants/name_pages.dart';
 import 'package:weather_app/data/repository/city_weather_repository.dart';
@@ -11,6 +11,7 @@ import 'package:weather_app/presntation/screens/search_screen.dart';
 import 'package:weather_app/presntation/screens/setting_screen.dart';
 
 import 'animate_route.dart';
+import 'bussness_logc/cubit/city_weather/city_weather_cubit.dart';
 
 class RouteApp {
   CityWeatherCubit cityWeatherCubit =
