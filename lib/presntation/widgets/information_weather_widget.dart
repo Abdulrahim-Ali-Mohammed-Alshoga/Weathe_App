@@ -39,12 +39,12 @@ class InformationWeatherWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(humidity,
-                  style: TextStyle(fontWeight: FontWeight.w500,fontSize: 19.sp,color: Colors.black),
+                  style: TextStyle(fontWeight: FontWeight.w500,fontSize: 19.sp),
                 ),
                 Flexible(
                   child: FittedBox(
                       child: Text( unit,
-                          style: TextStyle(fontSize: 13.sp,color: Colors.black),
+                          style: TextStyle(fontSize: 13.sp),
                           maxLines: 1,
                            ),),
                 )

@@ -31,11 +31,11 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
   var box = Hive.box<SettingHive>(HiveName.settingBD);
 
   specifiesUnitMeasure() {
-    isSelectedTemperature = box?.get(HiveName.temperatureSettingBD) ??
+    isSelectedTemperature = box.get(HiveName.temperatureSettingBD) ??
         SettingHive({'C': false, "F": true}, "F");
-    isSelectedPressure = box?.get(HiveName.pressureSettingBD) ??
+    isSelectedPressure = box.get(HiveName.pressureSettingBD) ??
         SettingHive({'mmHg': false, "hPa": true}, "hpa");
-    isSelectedWind = box?.get(HiveName.windSettingBD) ??
+    isSelectedWind = box.get(HiveName.windSettingBD) ??
         SettingHive({'m/s': true, "km/h": false}, "m/s");
   }
 
@@ -53,10 +53,10 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
         cityWeather.icon.substring(0, cityWeather.icon.length - 1));
     return Container(
       //color: Colors.white,
+      color: Theme.of(context).textTheme.headline5?.color,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Stack(
             alignment: Alignment.bottomCenter,
             clipBehavior: Clip.none,
@@ -67,7 +67,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                   clipper: MyCustomClipper(),
                   child: Container(
                     height: 370,
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     // decoration: BoxDecoration(boxShadow: [
                     //   BoxShadow(
                     //       color: Colors.deepOrange,
@@ -91,30 +91,34 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, NamePage.listSavedAreas);
+                          Navigator.pushNamed(context, NamePage.listSavedAreas,
+                              arguments: ListSavedAreaArgument(
+                                  colorImage:colorShadow));
                         },
                         child: Image.asset(
                           "assets/images/menu-bar.png",
                           height: 30.h,
                           width: 30.w,
-                          color:Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyText1?.color,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
                               .pushNamed(NamePage.settingScreen,
-                              arguments: SettingArgument(
-                                temperature: isSelectedTemperature.selectSetting,
-                                wind: isSelectedWind.selectSetting,
-                                pressure: isSelectedPressure.selectSetting,
-                              ))
+                                  arguments: SettingArgument(
+                                    temperature:
+                                        isSelectedTemperature.selectSetting,
+                                    wind: isSelectedWind.selectSetting,
+                                    pressure: isSelectedPressure.selectSetting,
+                                  ))
                               .then((value) => setState(() {
-                            specifiesUnitMeasure();
-                          }));
+                                    specifiesUnitMeasure();
+                                  }));
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.settings_outlined,
+                          color: Theme.of(context).textTheme.bodyText1?.color,
                           size: 25,
                         ),
                       )

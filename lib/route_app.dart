@@ -37,8 +37,9 @@ class RouteApp {
             rightOrleft: 1.0,
             topOrBottom: 0.0);
       case NamePage.listSavedAreas:
+        ListSavedAreaArgument listSavedAreaArgument=settings.arguments as ListSavedAreaArgument;
         return AnimateRoute(
-            page: ListSavedAreasScreen(), rightOrleft: -1.0, topOrBottom: 0.0);
+            page: ListSavedAreasScreen(colorImage: listSavedAreaArgument.colorImage), rightOrleft: -1.0, topOrBottom: 0.0);
       case NamePage.searchScreen:
         return AnimateRoute(
             page: const SearchScreen(), rightOrleft: 0.0, topOrBottom: 0.0);

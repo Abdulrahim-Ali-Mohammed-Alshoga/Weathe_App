@@ -28,6 +28,7 @@ cardColor: MyColors.colorAppDark,
         headline2: TextStyle(color: Colors.white),
         //هذا استخدام للكونتينر الذي في الاعدادات
         bodyText1: TextStyle(color: MyColors.colorImageDark),
+        headline5: TextStyle(color: MyColors.colorClipperDark),
         headline6: TextStyle(color: Colors.grey)),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
@@ -67,6 +68,7 @@ cardColor: MyColors.colorAppDark,
 
         headline2: const TextStyle(color: Color(0xFF3F3C36)),
         bodyText1:  const TextStyle(color: MyColors.colorImageLight),
+        headline5:  const TextStyle(color: MyColors.colorClipperLight),
         headline6: TextStyle(color: const Color(0xFF3F3C36).withOpacity(0.5))),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.grey),

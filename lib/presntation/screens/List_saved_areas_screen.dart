@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/name_pages.dart';
 
 class ListSavedAreasScreen extends StatefulWidget {
-  const ListSavedAreasScreen({Key? key}) : super(key: key);
+  Color colorImage;
+   ListSavedAreasScreen({Key? key,required this.colorImage}) : super(key: key);
 
   @override
   State<ListSavedAreasScreen> createState() => _ListSavedAreasScreenState();
@@ -16,9 +17,9 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
         appBar: AppBar(
           title: const Text(
             "Favorites",
-            style: TextStyle(color: Colors.black),
+
           ),
-          backgroundColor: Colors.white,
+
           leading: const BackButton(color: Colors.deepOrange),
           elevation: 0,
           actions: [
@@ -32,14 +33,12 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                 ))
           ],
         ),
-        body: Container(
-          color: Colors.white,
-          child: Column(
+        body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: 120,
-                color: Colors.blueAccent,
+                color: widget.colorImage,
                 child: Stack(
                   fit: StackFit.expand,
                   children: const [
@@ -122,6 +121,6 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
               ),
             ],
           ),
-        ));
+        );
   }
 }

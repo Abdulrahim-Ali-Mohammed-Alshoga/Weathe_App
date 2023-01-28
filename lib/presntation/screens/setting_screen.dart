@@ -100,7 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     const Text("Theme", style: TextStyle(color: Colors.grey)),
               ),
               Container(
-                height: 170,
+                height: 110,
                color:Theme.of(context).appBarTheme.backgroundColor,
                 child: Column(
                   children: [
@@ -141,27 +141,27 @@ class _SettingScreenState extends State<SettingScreen> {
                             });
                           }),
                     ),
-                    Divider(height: 0.h, thickness: .5),
-                    Expanded(
-                      flex: 1,
-                      child: RadioListTile<int>(
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 12.w),
-                          activeColor: Colors.deepOrange,
-                          selectedTileColor:Colors.grey,
-
-
-                          title: const Text("System"),
-                          value: 2,
-                          groupValue: numberSelectRadio,
-                          onChanged: (int? changed) {
-                            setState(() {
-                              numberSelectRadio = changed!;
-                              changeTheme(2);
-                            });
-                          }),
-                    ),
+                    // Divider(height: 0.h, thickness: .5),
+                    // Expanded(
+                    //   flex: 1,
+                    //   child: RadioListTile<int>(
+                    //       controlAffinity: ListTileControlAffinity.trailing,
+                    //       contentPadding:
+                    //           EdgeInsets.symmetric(horizontal: 12.w),
+                    //       activeColor: Colors.deepOrange,
+                    //       selectedTileColor:Colors.grey,
+                    //
+                    //
+                    //       title: const Text("System"),
+                    //       value: 2,
+                    //       groupValue: numberSelectRadio,
+                    //       onChanged: (int? changed) {
+                    //         setState(() {
+                    //           numberSelectRadio = changed!;
+                    //           changeTheme(2);
+                    //         });
+                    //       }),
+                    // ),
                   ],
                 ),
               )
