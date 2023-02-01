@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:weather_app/constants/colorShadow.dart';
-import 'package:weather_app/data/models/city_weather.dart';
+import 'package:weather_app/data/models/fived_day_weather_data.dart';
 import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
 
 import '../../constants/arguments.dart';
@@ -13,9 +13,9 @@ import 'information_weather_widget.dart';
 import 'my_box_shadow_painter.dart';
 
 class SuccessWeatherWidget extends StatefulWidget {
-  CityWeather cityWeather;
+  FiveDayWeatherData fiveDayWeatherData;
 
-  SuccessWeatherWidget({Key? key, required this.cityWeather}) : super(key: key);
+  SuccessWeatherWidget({Key? key, required this.fiveDayWeatherData}) : super(key: key);
 
   @override
   State<SuccessWeatherWidget> createState() => _SuccessWeatherWidgetState();
@@ -25,6 +25,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
   late CityWeather cityWeather;
   late SettingHive isSelectedTemperature;
   late SettingHive isSelectedWind;
+  late String nameCity;
 
   late SettingHive isSelectedPressure;
   late Color colorShadow;
@@ -48,11 +49,14 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
 
   @override
   Widget build(BuildContext context) {
-    cityWeather = widget.cityWeather;
-    colorShadow = ColorShadow().getColorShadow(
+    cityWeather = widget.fiveDayWeatherData.cityWeather[0]!;
+    nameCity=widget.fiveDayWeatherData.city.name;
+    colorShadow = ColorShadow.getColorShadow(
         cityWeather.icon.substring(0, cityWeather.icon.length - 1));
     return Container(
       //color: Colors.white,
+      height: double.infinity,
+      width: double.infinity,
       color: Theme.of(context).textTheme.headline5?.color,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +96,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, NamePage.listSavedAreas,
-                              arguments: ListSavedAreaArgument(
+                              arguments: ListSavedAreaArgument(nameCity: nameCity,typeUnit: isSelectedTemperature.typeSetting,cityWeather: cityWeather,
                                   colorImage:colorShadow));
                         },
                         child: Image.asset(
@@ -129,7 +133,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
               Positioned(
                 bottom: 220,
                 child: Center(
-                  child: Text(cityWeather.nameCity,
+                  child: Text(nameCity,
                       style: TextStyle(
                           fontSize: 30.sp, fontWeight: FontWeight.normal)),
                 ),
@@ -169,7 +173,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                     TextStyle(fontSize: 26.sp, fontWeight: FontWeight.normal)),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 50.h),
+            padding: EdgeInsets.only(top: 50.h,bottom: 130),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -198,9 +202,45 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
               ],
             ),
           ),
-          Container(
-            color: Colors.deepOrange,
-          ),
+         Expanded(
+           child: Stack(
+             clipBehavior: Clip.none,
+             children: [
+               Container(
+                    color: colorShadow.withOpacity(.3),
+                ),
+               Positioned(
+                 bottom: 35,
+                 left: 0,
+                 right: 0,
+                 child: SizedBox(
+                   height: 120,
+                   child: ListView.builder(
+                     scrollDirection: Axis.horizontal,
+                     primary: false,
+                     physics: const BouncingScrollPhysics(),
+                     itemCount: 10,
+                     itemBuilder: (BuildContext context, index) {
+
+                       return   Padding(
+                         padding:  EdgeInsets.only(left: index==0?30:10,right: index==9?20:0),
+                         child: Container(
+
+                           width: 110,
+                           
+                           decoration: BoxDecoration(
+                             color: Colors.white,
+                             borderRadius: BorderRadius.circular(10)
+                           ),
+                         ),
+                       );
+                     },
+                   ),
+                 ),
+               )
+             ],
+           ),
+         ),
         ],
       ),
     );

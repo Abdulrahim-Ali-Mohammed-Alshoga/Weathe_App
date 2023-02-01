@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 
 import 'package:weather_app/constants/name_pages.dart';
-import 'package:weather_app/data/models/city_weather.dart';
+import 'package:weather_app/data/models/fived_day_weather_data.dart';
 import 'package:weather_app/data/models/hive_models/setting_hive.dart';
 import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
 
-import '../../bussness_logc/cubit/city_weather/city_weather_cubit.dart';
-import '../../bussness_logc/cubit/city_weather/city_weather_state.dart';
+import '../../bussness_logc/cubit/city_weather/five_day_weather_cubit.dart';
+import '../../bussness_logc/cubit/city_weather/five_day_weather_state.dart';
 import '../../constants/arguments.dart';
 import '../../constants/hive_name.dart';
 import '../widgets/information_weather_widget.dart';
@@ -24,7 +24,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  late CityWeather cityWeather;
+  late FiveDayWeatherData fiveDayWeatherData;
 
 
   DateTime date = DateTime.now();
@@ -33,22 +33,22 @@ class _FirstPageState extends State<FirstPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<CityWeatherCubit>(context).getCityWeather("ibb");
+    BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("new york");
 
   }
 
   Widget build(BuildContext context) {
     print("object");
     return Scaffold(
-      body: BlocBuilder<CityWeatherCubit, CityWeatherState>(
+      body: BlocBuilder<FiveDayWeatherCubit, FiveDayWeatherState>(
         builder: (context, state) {
-          if (state is CityWeatherSuccess) {
-            cityWeather =
+          if (state is FiveDayWeatherSuccess) {
+            fiveDayWeatherData =
             BlocProvider
-                .of<CityWeatherCubit>(context)
-                .cityWeather[0];
+                .of<FiveDayWeatherCubit>(context)
+                .fiveDayWeatherData;
 
-            return  SuccessWeatherWidget(cityWeather: cityWeather,);
+            return  SuccessWeatherWidget(fiveDayWeatherData: fiveDayWeatherData,);
           } else {
             return Column(
               children: [

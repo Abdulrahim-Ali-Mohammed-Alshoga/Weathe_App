@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppBarSearchWidget extends StatefulWidget implements PreferredSizeWidget {
@@ -22,7 +21,8 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
   @override
   Widget build(BuildContext context) {
     return  AppBar(
-      elevation: 10,
+      elevation: 1,
+      leading: const BackButton(color: Colors.deepOrange),
       actions: [
         if (!isClean)
           IconButton(
@@ -36,7 +36,7 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
                   FocusScope.of(context).requestFocus(focusNode);
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.clear,
               )),
         if (isSearch)
@@ -51,9 +51,9 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
                   });
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
-                color: Colors.white,
+                // color: MyColors.white,
               )),
       ],
       title: TextFormField(
@@ -65,7 +65,7 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
         onChanged: (v) {
           if (isClean && controller.text.isNotEmpty) {
             setState(() {
-              print(666622);
+
               isClean = false;
             });
           } else if (controller.text.isEmpty) {
@@ -75,35 +75,41 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
           }
         },
         keyboardType: TextInputType.text,
-        cursorColor: Colors.white,
+        cursorColor: Colors.deepOrange,
         style: TextStyle(
-            color: Colors.white,
-         //   fontFamily: MyFont.titleFont,
-            fontSize: 16.sp),
+         height: 1.45,
+            // color: MyColors.white,
+            // fontFamily: MyFont.titleFont,
+            fontSize:17.sp),
+        cursorWidth: 1,
+        // cursorRadius:const Radius.circular(1000),
         controller: controller,
         autofocus: isSearch ? true : false,
         focusNode: focusNode,
         maxLines: 1,
-        cursorHeight: 24,
+        cursorHeight:30,
+
         textInputAction: TextInputAction.search,
         onFieldSubmitted: (s) {
           getMovie();
           setState(() {
             isSearch = false;
           });
-          print("object");
         },
         decoration: const InputDecoration(
+
+          contentPadding: EdgeInsets.only(left: 0),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
           ),
-          hintStyle: TextStyle(color: Colors.grey),
-          hintText: "Search",
+          hintStyle: TextStyle(fontSize: 17,color:Colors.grey),
+          hintText: "Search...",
         ),
       ),
+      centerTitle: true,
     );
   }
 }

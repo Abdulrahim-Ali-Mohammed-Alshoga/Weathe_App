@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorShadow{
-  Map<String, Color> colorShadow = {
+ static Map<String, Color> colorShadow = {
     "01": const Color(0xffff8510),
     "02": const Color(0xffc5edfe),
     "03": const Color(0xff70afea),
@@ -12,7 +12,7 @@ class ColorShadow{
     "13": const Color(0xff0c5bc0),
     "50": const Color(0xffbdbcba)
   };
- getColorShadow(String nameIconWeather){
+ static getColorShadow(String nameIconWeather){
     return colorShadow[nameIconWeather];
   }
 }

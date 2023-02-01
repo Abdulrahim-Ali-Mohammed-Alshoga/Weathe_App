@@ -9,7 +9,7 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarSearchWidget(),
       body: Container(
-        color: Colors.deepOrange,
+       // color: Colors.deepOrange,
       ),
     );
   }

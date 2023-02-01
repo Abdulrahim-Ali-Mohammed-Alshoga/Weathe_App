@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/data/models/fived_day_weather_data.dart';
 
 class SettingArgument{
   final Map<dynamic, dynamic> temperature;
@@ -9,5 +10,9 @@ class SettingArgument{
 }
 class ListSavedAreaArgument{
   final Color colorImage;
-  ListSavedAreaArgument({required this.colorImage});
+  final CityWeather cityWeather;
+  final String typeUnit;
+  final String nameCity;
+
+  ListSavedAreaArgument({required this.colorImage,required this.nameCity,required this.cityWeather,required this.typeUnit});
 }

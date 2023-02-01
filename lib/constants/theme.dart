@@ -10,7 +10,7 @@ enum AppTheme {
 final appThemeData = {
   AppTheme.darkMode: ThemeData(
     scaffoldBackgroundColor: MyColors.colorScaffoldDark,
-cardColor: MyColors.colorAppDark,
+primaryColor: MyColors.colorAppDark,
     radioTheme: RadioThemeData(
         fillColor: MaterialStateColor.resolveWith(
             (states) => Colors.grey.withOpacity(.3))),
