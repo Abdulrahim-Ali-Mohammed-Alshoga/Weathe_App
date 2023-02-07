@@ -4,18 +4,21 @@ import 'package:hive/hive.dart';
 import 'package:weather_app/constants/colorShadow.dart';
 import 'package:weather_app/data/models/fived_day_weather_data.dart';
 import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
+import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
 
 import '../../constants/arguments.dart';
 import '../../constants/hive_name.dart';
 import '../../constants/name_pages.dart';
 import '../../data/models/hive_models/setting_hive.dart';
+import 'five_day_list_widget.dart';
 import 'information_weather_widget.dart';
 import 'my_box_shadow_painter.dart';
 
 class SuccessWeatherWidget extends StatefulWidget {
   FiveDayWeatherData fiveDayWeatherData;
 
-  SuccessWeatherWidget({Key? key, required this.fiveDayWeatherData}) : super(key: key);
+  SuccessWeatherWidget({Key? key, required this.fiveDayWeatherData})
+      : super(key: key);
 
   @override
   State<SuccessWeatherWidget> createState() => _SuccessWeatherWidgetState();
@@ -50,7 +53,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
   @override
   Widget build(BuildContext context) {
     cityWeather = widget.fiveDayWeatherData.cityWeather[0]!;
-    nameCity=widget.fiveDayWeatherData.city.name;
+    nameCity = widget.fiveDayWeatherData.city.name;
     colorShadow = ColorShadow.getColorShadow(
         cityWeather.icon.substring(0, cityWeather.icon.length - 1));
     return Container(
@@ -96,8 +99,11 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, NamePage.listSavedAreas,
-                              arguments: ListSavedAreaArgument(nameCity: nameCity,typeUnit: isSelectedTemperature.typeSetting,cityWeather: cityWeather,
-                                  colorImage:colorShadow));
+                              arguments: ListSavedAreaArgument(
+                                  nameCity: nameCity,
+                                  typeUnit: isSelectedTemperature.typeSetting,
+                                  cityWeather: cityWeather,
+                                  colorImage: colorShadow));
                         },
                         child: Image.asset(
                           "assets/images/menu-bar.png",
@@ -155,17 +161,15 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 15),
+            padding: const EdgeInsets.only(top: 5),
             child: Center(
-              child: Text(
-                isSelectedTemperature.typeSetting == "F"
-                    ? "${double.parse("${(cityWeather.temperature - 273) * 9 / 5 + 32}").toInt()}F"
-                    : "${double.parse("${cityWeather.temperature - 273}").toInt()}C"
-                        .toString(),
-                style: TextStyle(fontSize: 40.sp, fontWeight: FontWeight.bold),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+                child: TextSettingWidget(
+              isSelectedTemperature: isSelectedTemperature.typeSetting,
+              temperature: cityWeather.temperature,
+                  fontSizeOne: 50,
+                  isWhite: false,
+                  fontSizeTwo: 35,
+            )),
           ),
           Center(
             child: Text(cityWeather.description,
@@ -173,7 +177,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                     TextStyle(fontSize: 26.sp, fontWeight: FontWeight.normal)),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 50.h,bottom: 130),
+            padding: EdgeInsets.only(top: 50.h, bottom: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -202,45 +206,11 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
               ],
             ),
           ),
-         Expanded(
-           child: Stack(
-             clipBehavior: Clip.none,
-             children: [
-               Container(
-                    color: colorShadow.withOpacity(.3),
-                ),
-               Positioned(
-                 bottom: 35,
-                 left: 0,
-                 right: 0,
-                 child: SizedBox(
-                   height: 120,
-                   child: ListView.builder(
-                     scrollDirection: Axis.horizontal,
-                     primary: false,
-                     physics: const BouncingScrollPhysics(),
-                     itemCount: 10,
-                     itemBuilder: (BuildContext context, index) {
-
-                       return   Padding(
-                         padding:  EdgeInsets.only(left: index==0?30:10,right: index==9?20:0),
-                         child: Container(
-
-                           width: 110,
-                           
-                           decoration: BoxDecoration(
-                             color: Colors.white,
-                             borderRadius: BorderRadius.circular(10)
-                           ),
-                         ),
-                       );
-                     },
-                   ),
-                 ),
-               )
-             ],
-           ),
-         ),
+          FiveDayListWidget(
+            colorShadow: colorShadow,
+            cityWeather: widget.fiveDayWeatherData.cityWeather.cast(),
+            isSelectedTemperature: isSelectedTemperature.typeSetting,
+          )
         ],
       ),
     );

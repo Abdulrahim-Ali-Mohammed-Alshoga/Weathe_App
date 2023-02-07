@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/name_pages.dart';
 
 import '../../data/models/fived_day_weather_data.dart';
+import '../widgets/text_setting_widget.dart';
 
 class ListSavedAreasScreen extends StatefulWidget {
   Color colorImage;
@@ -93,18 +94,15 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                               width: 40.w,
                             ),
                             SizedBox(
-                              width: 10.h,
+                              width: 5.h,
                             ),
-                            Text(
-                              widget.isSelectedTemperature == "F"
-                                  ? "${double.parse("${(cityWeather.temperature - 273) * 9 / 5 + 32}").toInt()}F"
-                                  : "${double.parse("${cityWeather.temperature - 273}").toInt()}C"
-                                      .toString(),
-                              style: TextStyle(
-                                  color: Color(0xffffffff),
-                                  fontSize: 26.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
+              TextSettingWidget(
+                isSelectedTemperature:widget.isSelectedTemperature,
+                temperature: cityWeather.temperature,
+                isWhite: true,
+                fontSizeOne: 26,
+                fontSizeTwo: 26,
+              ),
                           ],
                         ),
                       ],

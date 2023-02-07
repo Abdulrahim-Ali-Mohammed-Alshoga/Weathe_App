@@ -33,7 +33,7 @@ class _FirstPageState extends State<FirstPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("new york");
+    BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("sanaa");
 
   }
 

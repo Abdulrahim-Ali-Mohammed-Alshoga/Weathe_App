@@ -1,15 +1,19 @@
 class FiveDayWeatherData {
+  late List<dynamic> cityWeather;
+  late City city;
 
- late List<dynamic> cityWeather;
- late City city;
- FiveDayWeatherData.fromJson(Map<String, dynamic> json) {
+  FiveDayWeatherData.fromJson(Map<String, dynamic> json) {
     city = City.fromJson(json['city']);
-   cityWeather=json['list'].map((cityWeather) => CityWeather.fromJson(cityWeather)).toList();
+    cityWeather = json['list']
+        .map((cityWeather) => CityWeather.fromJson(cityWeather))
+        .toList();
 
 //cityWeather.add(CityWeather.fromJson(json['list']));
-  }}
+  }
+}
+
 class CityWeather {
- late num temperature;
+  late num temperature;
   late num windSpeed;
 
   late int humidity;
@@ -19,7 +23,6 @@ class CityWeather {
   late String date;
 
   CityWeather.fromJson(Map<String, dynamic> json) {
-
     temperature = json['main']['temp'];
 
     pressure = json['main']['pressure'];
@@ -30,12 +33,13 @@ class CityWeather {
     date = json['dt_txt'];
   }
 }
-class City {
- late int id;
- late String name;
 
+class City {
+  late int id;
+  late String name;
 
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-  }}
+  }
+}
