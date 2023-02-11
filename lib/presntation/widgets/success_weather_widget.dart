@@ -27,9 +27,9 @@ class SuccessWeatherWidget extends StatefulWidget {
 class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
   late CityWeather cityWeather;
   late SettingHive isSelectedTemperature;
-  late SettingHive isSelectedWind;
-  late String nameCity;
 
+  late String nameCity;
+  late SettingHive isSelectedWind;
   late SettingHive isSelectedPressure;
   late Color colorShadow;
   var box = Hive.box<SettingHive>(HiveName.settingBD);
@@ -209,6 +209,8 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
           FiveDayListWidget(
             colorShadow: colorShadow,
             cityWeather: widget.fiveDayWeatherData.cityWeather.cast(),
+            isSelectedPressure: isSelectedPressure.typeSetting,
+            isSelectedWind: isSelectedWind.typeSetting,
             isSelectedTemperature: isSelectedTemperature.typeSetting,
           )
         ],

@@ -26,7 +26,6 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   late FiveDayWeatherData fiveDayWeatherData;
 
-
   DateTime date = DateTime.now();
 
   @override
@@ -34,7 +33,6 @@ class _FirstPageState extends State<FirstPage> {
     // TODO: implement initState
     super.initState();
     BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("sanaa");
-
   }
 
   Widget build(BuildContext context) {
@@ -43,12 +41,12 @@ class _FirstPageState extends State<FirstPage> {
       body: BlocBuilder<FiveDayWeatherCubit, FiveDayWeatherState>(
         builder: (context, state) {
           if (state is FiveDayWeatherSuccess) {
-            fiveDayWeatherData =
-            BlocProvider
-                .of<FiveDayWeatherCubit>(context)
+            fiveDayWeatherData = BlocProvider.of<FiveDayWeatherCubit>(context)
                 .fiveDayWeatherData;
 
-            return  SuccessWeatherWidget(fiveDayWeatherData: fiveDayWeatherData,);
+            return SuccessWeatherWidget(
+              fiveDayWeatherData: fiveDayWeatherData,
+            );
           } else {
             return Column(
               children: [
@@ -71,8 +69,7 @@ class _FirstPageState extends State<FirstPage> {
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.bold)),
                       GestureDetector(
-                        onTap: () {
-          },
+                        onTap: () {},
                         child: const Icon(
                           Icons.settings_outlined,
                           size: 25,
@@ -82,7 +79,7 @@ class _FirstPageState extends State<FirstPage> {
                   ),
                 ),
                 CustomPaint(
-                  painter: MyBoxShadowPainter(colorShadow:Color(0xff456578)),
+                  painter: MyBoxShadowPainter(colorShadow: Color(0xff456578)),
                   child: ClipPath(
                     clipper: MyCustomClipper(),
                     child: Container(

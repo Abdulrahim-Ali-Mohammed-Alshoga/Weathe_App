@@ -17,7 +17,7 @@ class MyBoxShadowPainter extends CustomPainter {
 
     path.close();
 
-    canvas.drawShadow(path, colorShadow, 90.0, true);
+    canvas.drawShadow(path, colorShadow, 100.0, false);
   }
 
   @override
