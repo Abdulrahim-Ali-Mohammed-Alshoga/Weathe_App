@@ -97,9 +97,10 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                               width: 5.h,
                             ),
               TextSettingWidget(
-                isSelectedTemperature:widget.isSelectedTemperature,
-                temperature: cityWeather.temperature,
+                measurementUnit:widget.isSelectedTemperature,
+                numberUnit: cityWeather.temperature,
                 isWhite: true,
+                typeUnit: "temperature",
                 fontSizeOne: 26,
                 fontSizeTwo: 26,
               ),

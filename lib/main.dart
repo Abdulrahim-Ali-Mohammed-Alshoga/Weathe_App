@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ import 'data/models/hive_models/setting_hive.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  await Firebase.initializeApp();
   Hive.registerAdapter(SettingHiveAdapter());
   await Hive.openBox<SettingHive>(HiveName.settingBD);
   await Hive.openBox(HiveNameTheme.themeDB);

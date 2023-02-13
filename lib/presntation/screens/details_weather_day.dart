@@ -25,10 +25,10 @@ class DetailsWeatherDay extends StatefulWidget {
 
 class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
   @override
-  late List<int> humidity;
+
 
   Widget build(BuildContext context) {
-    humidity = widget.humidity;
+   print(widget.typeUnit);
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -42,7 +42,7 @@ class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
               height: 10,
             ),
             CardDetailsWeatherWidget(
-                wind: widget.humidity,
+                numberUnit: widget.humidity,
                 image: "assets/images/humidity12.png",
                 typeWeather: "Humidity",
                 measurementUnit: "%"),
@@ -50,18 +50,18 @@ class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
               height: 20,
             ),
             CardDetailsWeatherWidget(
-                wind: widget.wind,
+                numberUnit: widget.wind,
                 image: "assets/images/windspeed1.png",
                 typeWeather: "Wind",
-                measurementUnit: "%"),
+                measurementUnit: widget.typeUnit["wind"]!),
             Container(
               height: 20,
             ),
             CardDetailsWeatherWidget(
-                wind: widget.pressure,
+                numberUnit: widget.pressure,
                 image: "assets/images/pressure1.png",
                 typeWeather: "Pressure",
-                measurementUnit: "%"),
+                measurementUnit: widget.typeUnit["pressure"]!),
           ],
         ));
   }

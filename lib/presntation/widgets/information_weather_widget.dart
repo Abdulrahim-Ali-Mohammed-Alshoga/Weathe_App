@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
 
 import '../../constants/colorShadow.dart';
 
 class InformationWeatherWidget extends StatelessWidget {
-  InformationWeatherWidget(
-      {Key? key,
-      required this.humidity,
-      required this.unit,
-      required this.image,
-      required this.colorShadow})
+  InformationWeatherWidget({Key? key,
+    required this.numberUnit,
+    required this.measurementUnit,
+    required this.typeUnit,
+    required this.image,
+    required this.colorShadow})
       : super(key: key);
-  String humidity;
-  String image, unit;
+  num numberUnit;
+  String image,measurementUnit,typeUnit;
   Color colorShadow;
-
 
 
   @override
@@ -30,7 +30,7 @@ class InformationWeatherWidget extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 10.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color:colorShadow.withOpacity(.7),
+                color: colorShadow.withOpacity(.99),
                 borderRadius: BorderRadius.circular(10)),
             child: Image.asset(image, height: 60, width: 60),
           ),
@@ -38,15 +38,19 @@ class InformationWeatherWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(humidity,
-                  style: TextStyle(fontWeight: FontWeight.w500,fontSize: 19.sp),
-                ),
+              TextSettingWidget(fontSizeOne: 20,
+                    fontSizeTwo: 0,
+                    isWhite: false,
+                    typeUnit: typeUnit,
+                    measurementUnit: measurementUnit,
+                    numberUnit: numberUnit),
+
                 Flexible(
                   child: FittedBox(
-                      child: Text( unit,
-                          style: TextStyle(fontSize: 13.sp),
-                          maxLines: 1,
-                           ),),
+                    child: Text(measurementUnit,
+                      style: TextStyle(fontSize: 13.sp),
+                      maxLines: 1,
+                    ),),
                 )
               ],
             ),

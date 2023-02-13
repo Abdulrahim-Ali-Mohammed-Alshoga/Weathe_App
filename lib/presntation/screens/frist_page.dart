@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,12 +28,14 @@ class _FirstPageState extends State<FirstPage> {
   late FiveDayWeatherData fiveDayWeatherData;
 
   DateTime date = DateTime.now();
-
+ FirebaseMessaging fbm=FirebaseMessaging.instance;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("sanaa");
+    
+  fbm.getToken().then((value) => print(value));
+    BlocProvider.of<FiveDayWeatherCubit>(context).getCityWeather("Tokyo");
   }
 
   Widget build(BuildContext context) {

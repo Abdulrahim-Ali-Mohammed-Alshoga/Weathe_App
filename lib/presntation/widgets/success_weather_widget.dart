@@ -164,8 +164,9 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
             padding: const EdgeInsets.only(top: 5),
             child: Center(
                 child: TextSettingWidget(
-              isSelectedTemperature: isSelectedTemperature.typeSetting,
-              temperature: cityWeather.temperature,
+                  typeUnit: "temperature",
+                  measurementUnit: isSelectedTemperature.typeSetting,
+                  numberUnit: cityWeather.temperature,
                   fontSizeOne: 50,
                   isWhite: false,
                   fontSizeTwo: 35,
@@ -183,24 +184,21 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
               children: [
                 InformationWeatherWidget(
                     image: "assets/images/windspeed1.png",
-                    humidity: isSelectedWind.typeSetting == "m/s"
-                        ? "${cityWeather.windSpeed}"
-                        : "${(cityWeather.windSpeed * 3.6).toInt()}",
-                    unit: isSelectedWind.typeSetting == "m/s" ? "m/s" : "Km/h",
+                    numberUnit: cityWeather.windSpeed,
+                    typeUnit:"wind" ,
+                    measurementUnit: isSelectedWind.typeSetting ,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
                     image: "assets/images/pressure1.png",
-                    humidity: isSelectedPressure.typeSetting == "hPa"
-                        ? "${cityWeather.pressure}"
-                        : "${(cityWeather.pressure * 0.75).toInt()}",
-                    unit: isSelectedPressure.typeSetting == "hPa"
-                        ? "hPa"
-                        : "mmHg",
+                    numberUnit:cityWeather.pressure,
+                    typeUnit:"pressure",
+                    measurementUnit: isSelectedPressure.typeSetting,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
                   image: "assets/images/humidity12.png",
-                  humidity: "${cityWeather.humidity}",
-                  unit: "%",
+                  numberUnit: cityWeather.humidity,
+                  typeUnit: "humidity",
+                  measurementUnit: "%",
                   colorShadow: colorShadow,
                 )
               ],

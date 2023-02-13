@@ -61,7 +61,7 @@ class FiveDayListWidget extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-            color: colorShadow.withOpacity(.3),
+            color: colorShadow.withOpacity(.5),
             height: 80,
           ),
           Positioned(
@@ -92,9 +92,9 @@ class FiveDayListWidget extends StatelessWidget {
                                         .weekday]
                                     .toString(),
                             typeUnit: {
-                              "isSelectedTemperature": isSelectedTemperature,
-                              "isSelectedWind": isSelectedWind,
-                              "isSelectedPressure": isSelectedPressure,
+                              "temperature": isSelectedTemperature,
+                              "wind": isSelectedWind,
+                              "pressure": isSelectedPressure,
                             }));
                   },
                   child: Padding(
@@ -108,7 +108,7 @@ class FiveDayListWidget extends StatelessWidget {
                           height: 120,
                           width: 110,
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: colorShadow.withOpacity(.99),
                               borderRadius: BorderRadius.circular(10)),
                           child: Stack(
                             clipBehavior: Clip.none,
@@ -127,8 +127,9 @@ class FiveDayListWidget extends StatelessWidget {
                               Positioned(
                                 bottom: 5,
                                 child: TextSettingWidget(
-                                  isSelectedTemperature: isSelectedTemperature,
-                                  temperature: fiveDay[index].temperature,
+                                  measurementUnit: isSelectedTemperature,
+                                  numberUnit: fiveDay[index].temperature,
+                                  typeUnit: "temperature",
                                   fontSizeOne: 40,
                                   isWhite: false,
                                   fontSizeTwo: 30,

@@ -6,34 +6,56 @@ class TextSettingWidget extends StatelessWidget {
       {Key? key,
       required this.fontSizeOne,
       required this.fontSizeTwo,
-        required this.isWhite,
-      required this.isSelectedTemperature,
-      required this.temperature})
+      required this.isWhite,
+      required this.typeUnit,
+      required this.measurementUnit,
+      required this.numberUnit})
       : super(key: key);
-  String isSelectedTemperature;
-  num temperature;
+  String measurementUnit, typeUnit;
+  num numberUnit;
   bool isWhite;
   int fontSizeOne, fontSizeTwo;
 
   @override
   Widget build(BuildContext context) {
+
     return RichText(
       overflow: TextOverflow.ellipsis,
       text: TextSpan(children: <TextSpan>[
         TextSpan(
-            text: isSelectedTemperature == "F"
-                ? "${double.parse("${(temperature - 273) * 9 / 5 + 32}").toInt()}"
-                : "${double.parse("${temperature - 273}").toInt()}",
+            text: typeUnit == "temperature"
+                ? measurementUnit == "F"
+                    ? "${double.parse("${(numberUnit - 273) * 9 / 5 + 32}").toInt()}"
+                    : "${double.parse("${numberUnit - 273}").toInt()}"
+                : typeUnit == "pressure"
+                    ? measurementUnit == "hPa"
+                ? "$numberUnit"
+                : "${(numberUnit * 0.75).toInt()}"
+                    : typeUnit == "wind"? measurementUnit == "m/s"
+                        ? "$numberUnit"
+                        : "${(numberUnit * 3.6).toInt()}":"$numberUnit",
             style: TextStyle(
-                color: isWhite?const Color(0xffffffff):Theme.of(context).textTheme.bodyText1!.color,
+                color: isWhite
+                    ? const Color(0xffffffff)
+                    : Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: fontSizeOne.sp,
                 fontWeight: FontWeight.bold)),
         TextSpan(
-            text: isSelectedTemperature == "F"
-                ? "°F"
-                : "°C",
+            text: typeUnit == "temperature"
+                ? measurementUnit == "F"
+                    ? "°F"
+                    : "°C"
+                : typeUnit == "pressure"
+                    ? measurementUnit == "hPa"
+                        ? "hPa"
+                        : "mmHg"
+                    : typeUnit == "wind"? measurementUnit == "m/s"
+                        ? "m/s"
+                        : "Km/h":"%",
             style: TextStyle(
-                color:isWhite?const Color(0xffffffff): Theme.of(context).textTheme.bodyText1!.color,
+                color: isWhite
+                    ? const Color(0xffffffff)
+                    : Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: fontSizeTwo.sp,
                 fontWeight: FontWeight.bold))
       ]),
