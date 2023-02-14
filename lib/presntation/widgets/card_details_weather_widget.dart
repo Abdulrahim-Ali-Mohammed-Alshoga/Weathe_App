@@ -4,7 +4,11 @@ import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
 
 class CardDetailsWeatherWidget extends StatelessWidget {
   CardDetailsWeatherWidget(
-      {Key? key, required this.numberUnit, required this.measurementUnit, required this.image, required this.typeWeather})
+      {Key? key,
+      required this.numberUnit,
+      required this.measurementUnit,
+      required this.image,
+      required this.typeWeather})
       : super(key: key);
   String image, typeWeather, measurementUnit;
   List<num> numberUnit;
@@ -42,8 +46,7 @@ class CardDetailsWeatherWidget extends StatelessWidget {
               children: [
                 ...List.generate(
                     numberUnit.length,
-                        (index) =>
-                        Column(
+                    (index) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Opacity(
@@ -53,16 +56,15 @@ class CardDetailsWeatherWidget extends StatelessWidget {
                                   style: TextStyle(fontSize: 16.sp),
                                 )),
                             Padding(
-                              padding: const EdgeInsets.only(top: 7),
-                              child:   TextSettingWidget(isWhite: false,
-                                fontSizeOne: 19,
-                                fontSizeTwo: 13,
-                                typeUnit: typeWeather.toLowerCase(),
-                                measurementUnit: measurementUnit,
-                                numberUnit
-                                    :numberUnit[index],)
-                            ),
-
+                                padding: const EdgeInsets.only(top: 7),
+                                child: TextSettingWidget(
+                                  isWhite: false,
+                                  fontSizeOne: 19,
+                                  fontSizeTwo: 13,
+                                  typeUnit: typeWeather.toLowerCase(),
+                                  measurementUnit: measurementUnit,
+                                  numberUnit: numberUnit[index],
+                                )),
                           ],
                         ))
               ],

@@ -7,7 +7,7 @@ import 'package:weather_app/data/repository/five_day_weather_repository.dart';
 import 'package:weather_app/data/web_services/five_day_weather_web_service.dart';
 import 'package:weather_app/presntation/screens/List_saved_areas_screen.dart';
 import 'package:weather_app/presntation/screens/details_weather_day.dart';
-import 'package:weather_app/presntation/screens/frist_page.dart';
+import 'package:weather_app/presntation/screens/home_screen.dart';
 import 'package:weather_app/presntation/screens/search_screen.dart';
 import 'package:weather_app/presntation/screens/setting_screen.dart';
 
@@ -25,7 +25,7 @@ class RouteApp {
           builder: (context) {
             return BlocProvider<FiveDayWeatherCubit>(
                 create: (context) => cityWeatherCubit,
-                child: const FirstPage());
+                child: const HomeScreen());
           },
         );
       case NamePage.settingScreen:

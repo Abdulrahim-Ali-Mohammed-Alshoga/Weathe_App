@@ -11,12 +11,10 @@ class ThemeCubit extends Cubit<ThemeState> {
 late  int typeTheme;
 
   changeTheme(int typeTheme)  {
-    print("54");
      themeBox.put(HiveNameTheme.checkTheme, typeTheme);
     emit(ThemeState(theme:typeTheme==0?AppTheme.lightMode:AppTheme.darkMode));
   }
   firstAppTheme()  {
-    print("555555555");
     //   print(await themeBox.get(HiveNameTheme.checkTheme, defaultValue: 0));
     typeTheme=themeBox.get(HiveNameTheme.checkTheme, defaultValue: 0);
     emit(ThemeState(theme:typeTheme==0?AppTheme.lightMode:AppTheme.darkMode));
@@ -24,7 +22,6 @@ late  int typeTheme;
 
   }
   getTheme()  {
-    print("555555555");
  //   print(await themeBox.get(HiveNameTheme.checkTheme, defaultValue: 0));
     typeTheme=themeBox.get(HiveNameTheme.checkTheme, defaultValue: 0);
 // emit(ThemeState(theme:typeTheme==0?AppTheme.lightMode:AppTheme.darkMode));

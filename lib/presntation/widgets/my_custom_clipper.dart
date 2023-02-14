@@ -5,9 +5,9 @@ class MyCustomClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    path.lineTo(0, size.height-150);
+    path.lineTo(0, size.height - 150);
     path.quadraticBezierTo(
-        size.width / 2, size.height , size.width, size.height- 150);
+        size.width / 2, size.height, size.width, size.height - 150);
     path.lineTo(size.width, 0);
     path.close();
     return path;

@@ -11,4 +11,5 @@ abstract class MyColors {
   static const colorAppLight = Color(0xfff0f0f0);
   static const colorImageLight = Color(0xff000000);
   static const colorImageDark = Color(0xffffffff);
+  MyColors._();
 }

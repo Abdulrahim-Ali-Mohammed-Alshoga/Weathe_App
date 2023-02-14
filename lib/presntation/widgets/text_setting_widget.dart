@@ -18,7 +18,6 @@ class TextSettingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return RichText(
       overflow: TextOverflow.ellipsis,
       text: TextSpan(children: <TextSpan>[
@@ -29,11 +28,13 @@ class TextSettingWidget extends StatelessWidget {
                     : "${double.parse("${numberUnit - 273}").toInt()}"
                 : typeUnit == "pressure"
                     ? measurementUnit == "hPa"
-                ? "$numberUnit"
-                : "${(numberUnit * 0.75).toInt()}"
-                    : typeUnit == "wind"? measurementUnit == "m/s"
                         ? "$numberUnit"
-                        : "${(numberUnit * 3.6).toInt()}":"$numberUnit",
+                        : "${(numberUnit * 0.75).toInt()}"
+                    : typeUnit == "wind"
+                        ? measurementUnit == "m/s"
+                            ? "$numberUnit"
+                            : "${(numberUnit * 3.6).toInt()}"
+                        : "$numberUnit",
             style: TextStyle(
                 color: isWhite
                     ? const Color(0xffffffff)
@@ -49,9 +50,11 @@ class TextSettingWidget extends StatelessWidget {
                     ? measurementUnit == "hPa"
                         ? "hPa"
                         : "mmHg"
-                    : typeUnit == "wind"? measurementUnit == "m/s"
-                        ? "m/s"
-                        : "Km/h":"%",
+                    : typeUnit == "wind"
+                        ? measurementUnit == "m/s"
+                            ? "m/s"
+                            : "Km/h"
+                        : "%",
             style: TextStyle(
                 color: isWhite
                     ? const Color(0xffffffff)

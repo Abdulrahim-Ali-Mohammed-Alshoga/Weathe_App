@@ -37,9 +37,8 @@ class FiveDayListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(dateTime.day);
     fiveDay = cityWeather.where((element) {
-      if(add>1){
+      if (add > 1) {
         temperatureOneDay.add(element.temperature);
         windOneDay.add(element.windSpeed);
         humidityOneDay.add(element.humidity);
@@ -50,11 +49,9 @@ class FiveDayListWidget extends StatelessWidget {
         add += 1;
         return true;
       } else {
-
         return false;
       }
     }).toList();
-    print(temperatureOneDay.length);
     return Expanded(
       child: Stack(
         // clipBehavior: Clip.none,
@@ -82,10 +79,11 @@ class FiveDayListWidget extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, NamePage.detailsWeatherDay,
                         arguments: DetailsWeatherDayArgument(
-                            wind: windOneDay.sublist(index,index+4),
-                            temperature: temperatureOneDay.sublist(index,index+4),
-                            humidity: humidityOneDay.sublist(index,index+4),
-                            pressure: pressureOneDay.sublist(index,index+4),
+                            wind: windOneDay.sublist(index, index + 4),
+                            temperature:
+                                temperatureOneDay.sublist(index, index + 4),
+                            humidity: humidityOneDay.sublist(index, index + 4),
+                            pressure: pressureOneDay.sublist(index, index + 4),
                             nameDayWeek: index == 0
                                 ? "Tommorow"
                                 : weekdayName[DateTime(dateTime.day + index + 1)

@@ -6,6 +6,7 @@ class AppBarSearchWidget extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   State<AppBarSearchWidget> createState() => _AppBarSearchWidgetState();
+
   @override
   // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -14,13 +15,14 @@ class AppBarSearchWidget extends StatefulWidget implements PreferredSizeWidget {
 class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
   bool isClean = true;
   FocusNode focusNode = FocusNode();
-  bool isSearch = true;TextEditingController controller = TextEditingController();
-  getMovie(){
+  bool isSearch = true;
+  TextEditingController controller = TextEditingController();
 
-  }
+  getMovie() {}
+
   @override
   Widget build(BuildContext context) {
-    return  AppBar(
+    return AppBar(
       elevation: 1,
       leading: const BackButton(color: Colors.deepOrange),
       actions: [
@@ -65,7 +67,6 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
         onChanged: (v) {
           if (isClean && controller.text.isNotEmpty) {
             setState(() {
-
               isClean = false;
             });
           } else if (controller.text.isEmpty) {
@@ -77,17 +78,17 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
         keyboardType: TextInputType.text,
         cursorColor: Colors.deepOrange,
         style: TextStyle(
-         height: 1.45,
+            height: 1.45,
             // color: MyColors.white,
             // fontFamily: MyFont.titleFont,
-            fontSize:17.sp),
+            fontSize: 17.sp),
         cursorWidth: 1,
         // cursorRadius:const Radius.circular(1000),
         controller: controller,
         autofocus: isSearch ? true : false,
         focusNode: focusNode,
         maxLines: 1,
-        cursorHeight:30,
+        cursorHeight: 30,
 
         textInputAction: TextInputAction.search,
         onFieldSubmitted: (s) {
@@ -97,7 +98,6 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
           });
         },
         decoration: const InputDecoration(
-
           contentPadding: EdgeInsets.only(left: 0),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
@@ -105,7 +105,7 @@ class _AppBarSearchWidgetState extends State<AppBarSearchWidget> {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
           ),
-          hintStyle: TextStyle(fontSize: 17,color:Colors.grey),
+          hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
           hintText: "Search...",
         ),
       ),

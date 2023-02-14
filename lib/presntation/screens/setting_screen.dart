@@ -26,7 +26,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-   int numberSelectRadio=0;
+  int numberSelectRadio = 0;
 
   var box = Hive.box<SettingHive>(HiveName.settingBD);
   var themeBox = Hive.box(HiveNameTheme.themeDB);
@@ -39,154 +39,152 @@ class _SettingScreenState extends State<SettingScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    numberSelectRadio=  BlocProvider.of<ThemeCubit>(context).getTheme();
+    numberSelectRadio = BlocProvider.of<ThemeCubit>(context).getTheme();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: const Text("Setting"),
-          elevation: 1,
-          leading: const BackButton(color: Colors.deepOrange),
-
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
-                  child: const Text("Units of measurement",
-                      style: TextStyle(color: Colors.grey)),
-                ),
-                Container(
-                  height: 180,
-                  color:Theme.of(context).appBarTheme.backgroundColor,
-
-                  child: Column(
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: toggleButtonsWidget(
-                              "Temperature",
-                              "C",
-                              "F",
-                              widget.isSelectedTemperature.cast(),
-                              HiveName.temperatureSettingBD)),
-                      Divider(height: 0.h, thickness: .5),
-                      Expanded(
-                          flex: 1,
-                          child: toggleButtonsWidget(
-                              "Wind Speed",
-                              "m/s",
-                              "km/h",
-                              widget.isSelectedWind.cast(),
-                              HiveName.windSettingBD)),
-                      Divider(height: 0.h, thickness: .5),
-                      Expanded(
-                          flex: 1,
-                          child: toggleButtonsWidget(
-                              "Pressure",
-                              "mmHg",
-                              "hPa",
-                              widget.isSelectedPressure.cast(),
-                              HiveName.pressureSettingBD)),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
-                  child:
-                      const Text("Theme", style: TextStyle(color: Colors.grey)),
-                ),
-                Container(
-                  height: 110,
-                 color:Theme.of(context).appBarTheme.backgroundColor,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: RadioListTile<int>(
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 12.w),
-                            toggleable: false,
-                            activeColor: Colors.deepOrange,
-                            title: const Text("Light"),
-                            value: 0,
-                            groupValue: numberSelectRadio,
-                            onChanged: (int? changed) {
-                              setState(() {
-                                numberSelectRadio = changed!;
-
-                                changeTheme(0);
-                              });
-                            }),
-                      ),
-                      Divider(height: 0.h, thickness: .5),
-                      Expanded(
-                        flex: 1,
-                        child: RadioListTile<int>(
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 12.w),
-                            activeColor: Colors.deepOrange,
-                            title: const Text("dark"),
-                            value: 1,
-                            groupValue: numberSelectRadio,
-                            onChanged: (int? changed) {
-                              setState(() {
-                                numberSelectRadio = changed!;
-                                changeTheme(1);
-                              });
-                            }),
-                      ),
-
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
-                  child:
-                  const Text("Current location", style: TextStyle(color: Colors.grey)),
-                ),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.pushNamed(context, NamePage.searchScreen);
-                  },
-                  child: Container(
-                    height: 74,
-                    margin: EdgeInsets.symmetric(horizontal: 12.w),
-                    color:Theme.of(context).appBarTheme.backgroundColor,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
-                              Text("Location",style: TextStyle (fontSize: 17.sp,fontWeight: FontWeight.w400)),
-                              const Icon(Icons.expand_circle_down_outlined)
-                            ],
-                          ),
-                        ),
-
-                        const Expanded(
-                          flex: 1,
-                          child:Align( alignment: Alignment.centerLeft,child: Text("Sanan", style: TextStyle(color: Colors.grey))),
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: const Text("Setting"),
+        elevation: 1,
+        leading: const BackButton(color: Colors.deepOrange),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
+              child: const Text("Units of measurement",
+                  style: TextStyle(color: Colors.grey)),
             ),
+            Container(
+              height: 180,
+              color: Theme.of(context).appBarTheme.backgroundColor,
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: toggleButtonsWidget(
+                          "Temperature",
+                          "C",
+                          "F",
+                          widget.isSelectedTemperature.cast(),
+                          HiveName.temperatureSettingBD)),
+                  Divider(height: 0.h, thickness: .5),
+                  Expanded(
+                      flex: 1,
+                      child: toggleButtonsWidget(
+                          "Wind Speed",
+                          "m/s",
+                          "km/h",
+                          widget.isSelectedWind.cast(),
+                          HiveName.windSettingBD)),
+                  Divider(height: 0.h, thickness: .5),
+                  Expanded(
+                      flex: 1,
+                      child: toggleButtonsWidget(
+                          "Pressure",
+                          "mmHg",
+                          "hPa",
+                          widget.isSelectedPressure.cast(),
+                          HiveName.pressureSettingBD)),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
+              child: const Text("Theme", style: TextStyle(color: Colors.grey)),
+            ),
+            Container(
+              height: 110,
+              color: Theme.of(context).appBarTheme.backgroundColor,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: RadioListTile<int>(
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
+                        toggleable: false,
+                        activeColor: Colors.deepOrange,
+                        title: const Text("Light"),
+                        value: 0,
+                        groupValue: numberSelectRadio,
+                        onChanged: (int? changed) {
+                          setState(() {
+                            numberSelectRadio = changed!;
+
+                            changeTheme(0);
+                          });
+                        }),
+                  ),
+                  Divider(height: 0.h, thickness: .5),
+                  Expanded(
+                    flex: 1,
+                    child: RadioListTile<int>(
+                        controlAffinity: ListTileControlAffinity.trailing,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
+                        activeColor: Colors.deepOrange,
+                        title: const Text("dark"),
+                        value: 1,
+                        groupValue: numberSelectRadio,
+                        onChanged: (int? changed) {
+                          setState(() {
+                            numberSelectRadio = changed!;
+                            changeTheme(1);
+                          });
+                        }),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20.h, left: 12.w, bottom: 5.h),
+              child: const Text("Current location",
+                  style: TextStyle(color: Colors.grey)),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, NamePage.searchScreen);
+              },
+              child: Container(
+                height: 74,
+                margin: EdgeInsets.symmetric(horizontal: 12.w),
+                color: Theme.of(context).appBarTheme.backgroundColor,
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Location",
+                              style: TextStyle(
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.w400)),
+                          const Icon(Icons.expand_circle_down_outlined)
+                        ],
+                      ),
+                    ),
+                    const Expanded(
+                      flex: 1,
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Sanan",
+                              style: TextStyle(color: Colors.grey))),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        );
+      ),
+    );
   }
 
   Widget toggleButtonsWidget(String nameListTile, String nameButtonOne,
@@ -218,7 +216,6 @@ resizeToAvoidBottomInset: false,
                   isSelect.update(isSelect.keys.toList()[i], (value) => false);
                 }
                 await box.put(nameHive, SettingHive(isSelect, selectType));
-                print(selectType);
                 setState(() {});
               }
             },

@@ -96,14 +96,14 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                             SizedBox(
                               width: 5.h,
                             ),
-              TextSettingWidget(
-                measurementUnit:widget.isSelectedTemperature,
-                numberUnit: cityWeather.temperature,
-                isWhite: true,
-                typeUnit: "temperature",
-                fontSizeOne: 26,
-                fontSizeTwo: 26,
-              ),
+                            TextSettingWidget(
+                              measurementUnit: widget.isSelectedTemperature,
+                              numberUnit: cityWeather.temperature,
+                              isWhite: true,
+                              typeUnit: "temperature",
+                              fontSizeOne: 26,
+                              fontSizeTwo: 26,
+                            ),
                           ],
                         ),
                       ],

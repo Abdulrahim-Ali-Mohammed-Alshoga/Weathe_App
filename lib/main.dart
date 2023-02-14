@@ -42,10 +42,10 @@ class MyApp extends StatelessWidget {
         return BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) => MaterialApp(
             title: 'Weather Live',
-debugShowCheckedModeBanner: false,
-         //   color:const Color(0xfff0f0f0),
+            debugShowCheckedModeBanner: false,
+            //   color:const Color(0xfff0f0f0),
             onGenerateRoute: routeApp.generateRoute,
-            theme:appThemeData[state.theme],
+            theme: appThemeData[state.theme],
           ),
         );
       },

@@ -25,10 +25,7 @@ class DetailsWeatherDay extends StatefulWidget {
 
 class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
   @override
-
-
   Widget build(BuildContext context) {
-   print(widget.typeUnit);
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

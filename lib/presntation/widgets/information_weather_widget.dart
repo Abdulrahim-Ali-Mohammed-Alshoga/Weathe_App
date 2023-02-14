@@ -5,17 +5,17 @@ import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
 import '../../constants/colorShadow.dart';
 
 class InformationWeatherWidget extends StatelessWidget {
-  InformationWeatherWidget({Key? key,
-    required this.numberUnit,
-    required this.measurementUnit,
-    required this.typeUnit,
-    required this.image,
-    required this.colorShadow})
+  InformationWeatherWidget(
+      {Key? key,
+      required this.numberUnit,
+      required this.measurementUnit,
+      required this.typeUnit,
+      required this.image,
+      required this.colorShadow})
       : super(key: key);
   num numberUnit;
-  String image,measurementUnit,typeUnit;
+  String image, measurementUnit, typeUnit;
   Color colorShadow;
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +38,21 @@ class InformationWeatherWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              TextSettingWidget(fontSizeOne: 20,
+                TextSettingWidget(
+                    fontSizeOne: 20,
                     fontSizeTwo: 0,
                     isWhite: false,
                     typeUnit: typeUnit,
                     measurementUnit: measurementUnit,
                     numberUnit: numberUnit),
-
                 Flexible(
                   child: FittedBox(
-                    child: Text(measurementUnit,
+                    child: Text(
+                      measurementUnit,
                       style: TextStyle(fontSize: 13.sp),
                       maxLines: 1,
-                    ),),
+                    ),
+                  ),
                 )
               ],
             ),

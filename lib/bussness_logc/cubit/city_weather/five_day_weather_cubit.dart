@@ -14,10 +14,10 @@ class FiveDayWeatherCubit extends Cubit<FiveDayWeatherState>{
     emit(FiveDayWeatherLoading());
     try {
   fiveDayWeatherData=await fiveDayWeatherRepository.getFiveDayWeatherData(nameCity);
-  print(fiveDayWeatherData);
+
       emit(FiveDayWeatherSuccess());
     } catch (e) {
-      print(e);
+
       emit(FiveDayWeatherFailure());
     }
   }

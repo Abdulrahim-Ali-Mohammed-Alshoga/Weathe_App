@@ -10,7 +10,7 @@ enum AppTheme {
 final appThemeData = {
   AppTheme.darkMode: ThemeData(
     scaffoldBackgroundColor: MyColors.colorScaffoldDark,
-primaryColor: MyColors.colorAppDark,
+    primaryColor: MyColors.colorAppDark,
     radioTheme: RadioThemeData(
         fillColor: MaterialStateColor.resolveWith(
             (states) => Colors.grey.withOpacity(.3))),
@@ -49,7 +49,7 @@ primaryColor: MyColors.colorAppDark,
   ),
   AppTheme.lightMode: ThemeData(
     scaffoldBackgroundColor: MyColors.colorScaffoldLight,
-   primaryColor: MyColors.colorAppLight,
+    primaryColor: MyColors.colorAppLight,
     radioTheme: RadioThemeData(
         fillColor: MaterialStateColor.resolveWith(
             (states) => Colors.grey.withOpacity(.3))),
@@ -57,7 +57,6 @@ primaryColor: MyColors.colorAppDark,
       titleTextStyle: TextStyle(
           color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-
       backgroundColor: MyColors.colorContainerLight,
       iconTheme: IconThemeData(color: Color(0xFF3F3C36), size: 25),
       actionsIconTheme: IconThemeData(color: Color(0xFF3F3C36), size: 25),
@@ -65,10 +64,9 @@ primaryColor: MyColors.colorAppDark,
     brightness: Brightness.light,
     backgroundColor: Colors.white,
     textTheme: TextTheme(
-
         headline2: const TextStyle(color: Color(0xFF3F3C36)),
-        bodyText1:  const TextStyle(color: MyColors.colorImageLight),
-        headline5:  const TextStyle(color: MyColors.colorClipperLight),
+        bodyText1: const TextStyle(color: MyColors.colorImageLight),
+        headline5: const TextStyle(color: MyColors.colorClipperLight),
         headline6: TextStyle(color: const Color(0xFF3F3C36).withOpacity(0.5))),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(color: Colors.grey),

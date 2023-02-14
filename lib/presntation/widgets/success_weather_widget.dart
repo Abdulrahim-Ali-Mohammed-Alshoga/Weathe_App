@@ -164,12 +164,12 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
             padding: const EdgeInsets.only(top: 5),
             child: Center(
                 child: TextSettingWidget(
-                  typeUnit: "temperature",
-                  measurementUnit: isSelectedTemperature.typeSetting,
-                  numberUnit: cityWeather.temperature,
-                  fontSizeOne: 50,
-                  isWhite: false,
-                  fontSizeTwo: 35,
+              typeUnit: "temperature",
+              measurementUnit: isSelectedTemperature.typeSetting,
+              numberUnit: cityWeather.temperature,
+              fontSizeOne: 50,
+              isWhite: false,
+              fontSizeTwo: 35,
             )),
           ),
           Center(
@@ -185,13 +185,13 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                 InformationWeatherWidget(
                     image: "assets/images/windspeed1.png",
                     numberUnit: cityWeather.windSpeed,
-                    typeUnit:"wind" ,
-                    measurementUnit: isSelectedWind.typeSetting ,
+                    typeUnit: "wind",
+                    measurementUnit: isSelectedWind.typeSetting,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
                     image: "assets/images/pressure1.png",
-                    numberUnit:cityWeather.pressure,
-                    typeUnit:"pressure",
+                    numberUnit: cityWeather.pressure,
+                    typeUnit: "pressure",
                     measurementUnit: isSelectedPressure.typeSetting,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
