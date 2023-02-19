@@ -5,6 +5,7 @@ import 'package:weather_app/constants/colorShadow.dart';
 import 'package:weather_app/data/models/fived_day_weather_data.dart';
 import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
 import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
+import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
 
 import '../../constants/arguments.dart';
 import '../../constants/hive_name.dart';
@@ -56,6 +57,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
     nameCity = widget.fiveDayWeatherData.city.name;
     colorShadow = ColorShadow.getColorShadow(
         cityWeather.icon.substring(0, cityWeather.icon.length - 1));
+
     return Container(
       //color: Colors.white,
       height: double.infinity,
@@ -164,9 +166,10 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
             padding: const EdgeInsets.only(top: 5),
             child: Center(
                 child: TextSettingWidget(
-              typeUnit: "temperature",
+              unitCalculator: TemperatureCalculator(
+                  measurementUnit: isSelectedTemperature.typeSetting,
+                  numberUnit: cityWeather.temperature),
               measurementUnit: isSelectedTemperature.typeSetting,
-              numberUnit: cityWeather.temperature,
               fontSizeOne: 50,
               isWhite: false,
               fontSizeTwo: 35,
@@ -184,20 +187,22 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
               children: [
                 InformationWeatherWidget(
                     image: "assets/images/windspeed1.png",
-                    numberUnit: cityWeather.windSpeed,
-                    typeUnit: "wind",
+                    unitCalculator: WindCalculator(
+                        measurementUnit: isSelectedWind.typeSetting,
+                        numberUnit: cityWeather.windSpeed),
                     measurementUnit: isSelectedWind.typeSetting,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
                     image: "assets/images/pressure1.png",
-                    numberUnit: cityWeather.pressure,
-                    typeUnit: "pressure",
+                    unitCalculator: PressureCalculator(
+                        measurementUnit: isSelectedPressure.typeSetting,
+                        numberUnit: cityWeather.pressure),
                     measurementUnit: isSelectedPressure.typeSetting,
                     colorShadow: colorShadow),
                 InformationWeatherWidget(
                   image: "assets/images/humidity12.png",
-                  numberUnit: cityWeather.humidity,
-                  typeUnit: "humidity",
+                  unitCalculator: HumidityCalculator(
+                      numberUnit: cityWeather.humidity, measurementUnit: "%"),
                   measurementUnit: "%",
                   colorShadow: colorShadow,
                 )

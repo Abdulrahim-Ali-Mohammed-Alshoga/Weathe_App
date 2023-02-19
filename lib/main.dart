@@ -19,6 +19,8 @@ void main() async {
   Hive.registerAdapter(SettingHiveAdapter());
   await Hive.openBox<SettingHive>(HiveName.settingBD);
   await Hive.openBox(HiveNameTheme.themeDB);
+  await Hive.openBox(HistoryCityHive.historyCityDB);
+  await Hive.openBox(CurrentLocationHive.currentLocationDB);
   runApp(BlocProvider<ThemeCubit>(
     create: (context) => ThemeCubit()..firstAppTheme(),
     child: MyApp(

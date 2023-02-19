@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/data/models/fived_day_weather_data.dart';
 import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
+import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
 
 import '../../constants/arguments.dart';
 import '../../constants/name_pages.dart';
@@ -126,8 +127,9 @@ class FiveDayListWidget extends StatelessWidget {
                                 bottom: 5,
                                 child: TextSettingWidget(
                                   measurementUnit: isSelectedTemperature,
-                                  numberUnit: fiveDay[index].temperature,
-                                  typeUnit: "temperature",
+                                  unitCalculator: TemperatureCalculator(
+                                      numberUnit: fiveDay[index].temperature,
+                                      measurementUnit: isSelectedTemperature),
                                   fontSizeOne: 40,
                                   isWhite: false,
                                   fontSizeTwo: 30,

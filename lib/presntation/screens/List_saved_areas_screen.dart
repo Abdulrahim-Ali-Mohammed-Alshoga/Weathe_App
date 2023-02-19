@@ -3,20 +3,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/constants/name_pages.dart';
 
 import '../../data/models/fived_day_weather_data.dart';
+import '../widgets/app_bar_search_widget.dart';
 import '../widgets/text_setting_widget.dart';
+import '../widgets/weather_unit_calculator.dart';
 
 class ListSavedAreasScreen extends StatefulWidget {
   Color colorImage;
   CityWeather cityWeather;
   String nameCity;
+
   String isSelectedTemperature;
 
-  ListSavedAreasScreen(
-      {Key? key,
-      required this.colorImage,
-      required this.nameCity,
-      required this.cityWeather,
-      required this.isSelectedTemperature})
+  ListSavedAreasScreen({Key? key,
+
+    required this.colorImage,
+    required this.nameCity,
+    required this.cityWeather,
+    required this.isSelectedTemperature})
       : super(key: key);
 
   @override
@@ -39,7 +42,8 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, NamePage.searchScreen);
+                //Navigator.pushNamed(context, NamePage.searchScreen);
+                showSearch(context: context, delegate: MySearchDelegate());
               },
               icon: const Icon(
                 Icons.search,
@@ -54,14 +58,14 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
             height: 120,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-              colors: <Color>[
-                widget.colorImage.withOpacity(.7),
-                widget.colorImage,
-              ],
-              begin: FractionalOffset(0.5, 0.0),
-              end: FractionalOffset(0.0, 0.0),
-              stops: [0.0, 0.7],
-            )),
+                  colors: <Color>[
+                    widget.colorImage.withOpacity(.7),
+                    widget.colorImage,
+                  ],
+                  begin: FractionalOffset(0.5, 0.0),
+                  end: FractionalOffset(0.0, 0.0),
+                  stops: [0.0, 0.7],
+                )),
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -89,7 +93,8 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                         Row(
                           children: [
                             Image.asset(
-                              "assets/images/${cityWeather.icon.substring(0, cityWeather.icon.length - 1)}d.png",
+                              "assets/images/${cityWeather.icon.substring(
+                                  0, cityWeather.icon.length - 1)}d.png",
                               height: 40.h,
                               width: 40.w,
                             ),
@@ -98,9 +103,11 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
                             ),
                             TextSettingWidget(
                               measurementUnit: widget.isSelectedTemperature,
-                              numberUnit: cityWeather.temperature,
                               isWhite: true,
-                              typeUnit: "temperature",
+                              unitCalculator: TemperatureCalculator(
+                                  measurementUnit: widget.isSelectedTemperature,
+                                  numberUnit: cityWeather.temperature
+                              ),
                               fontSizeOne: 26,
                               fontSizeTwo: 26,
                             ),
@@ -122,28 +129,28 @@ class _ListSavedAreasScreenState extends State<ListSavedAreasScreen> {
             padding: EdgeInsets.only(top: 30.h, left: 18.w),
             child: RichText(
                 text: TextSpan(children: <TextSpan>[
-              TextSpan(
-                text: "Add a city, area or specific address to your ",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 15.sp,
-                ),
-              ),
-              TextSpan(
-                  text: "Favorites ",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.sp,
-                  )),
-              TextSpan(
-                  text:
+                  TextSpan(
+                    text: "Add a city, area or specific address to your ",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15.sp,
+                    ),
+                  ),
+                  TextSpan(
+                      text: "Favorites ",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                      )),
+                  TextSpan(
+                      text:
                       "to quickly see what the that the weather is like there.",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15.sp,
-                  )),
-            ])),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15.sp,
+                      )),
+                ])),
           ),
           Padding(
             padding: EdgeInsets.only(top: 30.h, left: 18.w),

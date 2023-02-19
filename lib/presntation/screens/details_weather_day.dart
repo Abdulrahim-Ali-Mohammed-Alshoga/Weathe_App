@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/presntation/widgets/card_details_weather_widget.dart';
 
+import '../widgets/weather_unit_calculator.dart';
+
 class DetailsWeatherDay extends StatefulWidget {
   DetailsWeatherDay(
       {Key? key,
@@ -39,15 +41,22 @@ class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
               height: 10,
             ),
             CardDetailsWeatherWidget(
-                numberUnit: widget.humidity,
+
                 image: "assets/images/humidity12.png",
                 typeWeather: "Humidity",
+                unitCalculator:
+                [for(var i=0;i<widget.wind.length;i++)PressureCalculator(
+                    measurementUnit:"%",
+                    numberUnit: widget.humidity[i]), ],
                 measurementUnit: "%"),
             Container(
               height: 20,
             ),
             CardDetailsWeatherWidget(
-                numberUnit: widget.wind,
+
+                unitCalculator:[for(var i=0;i<widget.wind.length;i++)WindCalculator(
+                    measurementUnit: widget.typeUnit["wind"]!,
+                    numberUnit: widget.wind[i]), ],
                 image: "assets/images/windspeed1.png",
                 typeWeather: "Wind",
                 measurementUnit: widget.typeUnit["wind"]!),
@@ -55,7 +64,9 @@ class _DetailsWeatherDayState extends State<DetailsWeatherDay> {
               height: 20,
             ),
             CardDetailsWeatherWidget(
-                numberUnit: widget.pressure,
+                unitCalculator:[for(var i=0;i<widget.wind.length;i++)PressureCalculator(
+    measurementUnit: widget.typeUnit["pressure"]!,
+    numberUnit: widget.pressure[i]), ],
                 image: "assets/images/pressure1.png",
                 typeWeather: "Pressure",
                 measurementUnit: widget.typeUnit["pressure"]!),

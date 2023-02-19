@@ -8,6 +8,7 @@ import 'package:weather_app/constants/name_pages.dart';
 import '../../constants/hive_name.dart';
 import '../../constants/my_colors.dart';
 import '../../data/models/hive_models/setting_hive.dart';
+import '../widgets/app_bar_search_widget.dart';
 
 class SettingScreen extends StatefulWidget {
   SettingScreen(
@@ -148,7 +149,8 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, NamePage.searchScreen);
+                showSearch(context: context, delegate: MySearchDelegate());
+               // Navigator.pushNamed(context, NamePage.searchScreen);
               },
               child: Container(
                 height: 74,

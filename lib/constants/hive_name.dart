@@ -12,3 +12,13 @@ class HiveNameTheme {
   static const String checkTheme = "checkTheme";
   HiveNameTheme._();
 }
+class CurrentLocationHive {
+  static const String currentLocationDB = "currentLocation";
+  static const String city = "city";
+  CurrentLocationHive._();
+}
+class HistoryCityHive {
+  static const String historyCityDB = "historyCity";
+  static const String listCity = "city";
+  HistoryCityHive._();
+}

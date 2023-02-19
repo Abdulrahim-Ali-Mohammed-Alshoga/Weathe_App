@@ -38,9 +38,9 @@ final appThemeData = {
     hoverColor: Colors.white.withOpacity(0.1),
     // unselectedWidgetColor: const Color(0xff1560c6),
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: Color(0xff456898),
-      selectionColor: Color(0xffb30875),
-      selectionHandleColor: Color(0xff2c7d24),
+        selectionHandleColor: Colors.deepOrange, // Change bubble to red
+        cursorColor: Colors.deepOrange,
+        selectionColor: Color(0xff714335)
     ),
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: Color(0xffa4c3ee)),
@@ -50,6 +50,7 @@ final appThemeData = {
   AppTheme.lightMode: ThemeData(
     scaffoldBackgroundColor: MyColors.colorScaffoldLight,
     primaryColor: MyColors.colorAppLight,
+
     radioTheme: RadioThemeData(
         fillColor: MaterialStateColor.resolveWith(
             (states) => Colors.grey.withOpacity(.3))),
@@ -76,9 +77,9 @@ final appThemeData = {
     hoverColor: Colors.white.withOpacity(0.1),
     //  unselectedWidgetColor: const Color(0xff0b4916),
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: Color(0xff635b0d),
-      selectionColor: Color(0xff9e3228),
-      selectionHandleColor: Color(0xff021c40),
+        selectionHandleColor: Colors.deepOrange, // Change bubble to red
+        cursorColor: Colors.deepOrange,
+        selectionColor: Color(0xffEE8D6F)
     ),
     iconTheme: const IconThemeData(color: Color(0xFF3F3C36)),
     bottomSheetTheme: const BottomSheetThemeData(

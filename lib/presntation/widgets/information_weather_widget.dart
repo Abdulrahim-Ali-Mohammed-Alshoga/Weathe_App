@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
+import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
 
 import '../../constants/colorShadow.dart';
 
 class InformationWeatherWidget extends StatelessWidget {
   InformationWeatherWidget(
       {Key? key,
-      required this.numberUnit,
-      required this.measurementUnit,
-      required this.typeUnit,
+        required this.measurementUnit,
+        required this.unitCalculator,
       required this.image,
       required this.colorShadow})
       : super(key: key);
-  num numberUnit;
-  String image, measurementUnit, typeUnit;
+
+  UnitCalculator unitCalculator;
+  String image, measurementUnit;
   Color colorShadow;
 
   @override
@@ -42,9 +43,9 @@ class InformationWeatherWidget extends StatelessWidget {
                     fontSizeOne: 20,
                     fontSizeTwo: 0,
                     isWhite: false,
-                    typeUnit: typeUnit,
                     measurementUnit: measurementUnit,
-                    numberUnit: numberUnit),
+                    unitCalculator:unitCalculator ,
+                    ),
                 Flexible(
                   child: FittedBox(
                     child: Text(
