@@ -26,7 +26,7 @@ import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
             text: unitCalculator.getResulting(),
             style: TextStyle(
                 color: isWhite
-                    ? const Color(0xffffffff)
+                    ? const Color(0xfff0f0f0)
                     : Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: fontSizeOne.sp,
                 fontWeight: FontWeight.bold)),
@@ -34,7 +34,7 @@ import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
             text:measurementUnit,
             style: TextStyle(
                 color: isWhite
-                    ? const Color(0xffffffff)
+                    ? const Color(0xfff0f0f0)
                     : Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: fontSizeTwo.sp,
                 fontWeight: FontWeight.bold))

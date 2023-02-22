@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/app_bar_search_widget.dart';
+import '../widgets/show/my_search_delegate.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1),
-        () => showSearch(context: context, delegate: MySearchDelegate()));
+    // Future.delayed(const Duration(milliseconds: 1),
+      //  () => showSearch(context: context, delegate: MySearchDelegate()));
   }
 
   Widget build(BuildContext context) {

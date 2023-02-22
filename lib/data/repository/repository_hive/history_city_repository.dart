@@ -10,7 +10,10 @@ class HistoryCityRepository{
 
   static void setListCity(String listCity) {
     List<String> allCity= getListCity().cast();
-    allCity.add(listCity);
+    if(!allCity.contains(listCity)){
+      allCity.add(listCity);
+    }
+
     box.put(HistoryCityHive.listCity, allCity);
   }
 }

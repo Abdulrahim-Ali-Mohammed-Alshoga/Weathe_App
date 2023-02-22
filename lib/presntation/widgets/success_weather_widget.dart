@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:weather_app/constants/colorShadow.dart';
@@ -7,10 +8,12 @@ import 'package:weather_app/presntation/widgets/my_custom_clipper.dart';
 import 'package:weather_app/presntation/widgets/text_setting_widget.dart';
 import 'package:weather_app/presntation/widgets/weather_unit_calculator.dart';
 
+import '../../bussness_logc/cubit/city_weather/five_day_weather_cubit.dart';
 import '../../constants/arguments.dart';
 import '../../constants/hive_name.dart';
 import '../../constants/name_pages.dart';
 import '../../data/models/hive_models/setting_hive.dart';
+import '../../data/repository/repository_hive/current_location_repository.dart';
 import 'five_day_list_widget.dart';
 import 'information_weather_widget.dart';
 import 'my_box_shadow_painter.dart';
@@ -53,6 +56,7 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print(54445965);
     cityWeather = widget.fiveDayWeatherData.cityWeather[0]!;
     nameCity = widget.fiveDayWeatherData.city.name;
     colorShadow = ColorShadow.getColorShadow(
@@ -126,6 +130,13 @@ class _SuccessWeatherWidgetState extends State<SuccessWeatherWidget> {
                                   ))
                               .then((value) => setState(() {
                                     specifiesUnitMeasure();
+                                    if(nameCity.toLowerCase().trim()!=CurrentLocationRepository.getCurrentLocation().toLowerCase().trim()){
+                                      print(nameCity.toLowerCase());
+                                      print(CurrentLocationRepository.getCurrentLocation().toLowerCase());
+                                      BlocProvider.of<FiveDayWeatherCubit>(context)
+                                          .getCityWeather(CurrentLocationRepository.getCurrentLocation());
+                                    }
+
                                   }));
                         },
                         child: Icon(

@@ -23,7 +23,7 @@ class FiveDayWeatherCubit extends Cubit<FiveDayWeatherState> {
       if (e.type == DioErrorType.response) {
         // print('catched');
         if (e.response?.statusCode == 404) {
-          emit(FiveDayWeatherFailure(typeFailure: "No city"));
+          emit(FiveDayWeatherFailure(typeFailure: "Check the name of the Current Location"));
         } else {
           emit(FiveDayWeatherFailure(typeFailure: "catch"));
         }
@@ -44,7 +44,7 @@ class FiveDayWeatherCubit extends Cubit<FiveDayWeatherState> {
       }
 
       if (e.type == DioErrorType.other) {
-        emit(FiveDayWeatherFailure(typeFailure: "Something went wrong"));
+        emit(FiveDayWeatherFailure(typeFailure: "Something went wrong : Make sure you are connected to the internet"));
         // print('Something went wrong');
         return;
       }

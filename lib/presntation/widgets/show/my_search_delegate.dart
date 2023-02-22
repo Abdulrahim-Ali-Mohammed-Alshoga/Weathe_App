@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/repository/repository_hive/history_city_repository.dart';
+import '../../../bussness_logc/cubit/city_weather/five_day_weather_cubit.dart';
+import '../../../bussness_logc/cubit/city_weather/five_day_weather_state.dart';
+import '../../../data/repository/repository_hive/current_location_repository.dart';
+import '../../../data/repository/repository_hive/history_city_repository.dart';
+import 'my_show_snack_bar.dart';
 
 class MySearchDelegate extends SearchDelegate {
+  final FiveDayWeatherCubit city;
   MySearchDelegate({
+    required this.city,
     String hintText = "City or area",
   }) : super(
           searchFieldLabel: hintText,
@@ -24,20 +31,19 @@ class MySearchDelegate extends SearchDelegate {
         // ),
 
         inputDecorationTheme: const InputDecorationTheme(
-
             hintStyle: TextStyle(color: Colors.grey), border: InputBorder.none),
-        appBarTheme:  const AppBarTheme(
-       backgroundColor: Colors.white,
-           // color: Colors.white,
-shadowColor: Colors.yellow,
-            surfaceTintColor: Colors.yellow,
-            foregroundColor: Colors.yellow,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          // color: Colors.white,
+          shadowColor: Colors.yellow,
+          surfaceTintColor: Colors.yellow,
+          foregroundColor: Colors.yellow,
 
-            toolbarTextStyle: TextStyle(color: Colors.yellow),
-            titleTextStyle: TextStyle(color: Colors.yellow),
-            elevation: 1,
-            iconTheme: IconThemeData(color: Colors.deepOrange),
-       ));
+          toolbarTextStyle: TextStyle(color: Colors.yellow),
+          titleTextStyle: TextStyle(color: Colors.yellow),
+          elevation: 1,
+          iconTheme: IconThemeData(color: Colors.deepOrange),
+        ));
   }
 
   @override
@@ -88,18 +94,53 @@ shadowColor: Colors.yellow,
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Text(
-      "54",
-      style: TextStyle(color: Colors.orange),
-    );
+    return BlocProvider.value(value: city,child:
+    BlocConsumer<FiveDayWeatherCubit, FiveDayWeatherState>(
+      builder: (context, state) {
+        print(state);
+
+        if (state is FiveDayWeatherSuccess) {
+          return const Text("vxcv");
+        }
+        else if(state is FiveDayWeatherLoading){
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.deepOrange,
+            ),
+          );
+
+        } else{
+return Text(
+  ""
+)
+    ;
+        }
+      },
+
+      listener: (context, state) {
+        if (state is FiveDayWeatherSuccess) {
+          CurrentLocationRepository.setCurrentLocation(currentLocation: query.trim());
+          HistoryCityRepository.setListCity(query.trim());
+          close(context, null);
+        }
+        else if (state is FiveDayWeatherFailure) {
+          MyShowSnackBar(context,state.typeFailure);
+        }
+
+      },
+
+    )
+      ,);
   }
-@override
+
+  @override
   void showResults(BuildContext context) {
     // TODO: implement showResults
     super.showResults(context);
-    HistoryCityRepository.setListCity(query);
-    close(context, null);
+    city.getCityWeather(query.trim());
+  // city.getCityWeather(query);
   }
+
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> listCity = HistoryCityRepository.getListCity().cast();
@@ -112,7 +153,10 @@ shadowColor: Colors.yellow,
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
         onTap: () {
-          close(context, suggestionsList[index]);
+
+          query=suggestionsList[index];
+          showResults(context);
+
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(

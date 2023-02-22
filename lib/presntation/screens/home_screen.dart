@@ -10,6 +10,7 @@ import '../../bussness_logc/cubit/city_weather/five_day_weather_cubit.dart';
 import '../../bussness_logc/cubit/city_weather/five_day_weather_state.dart';
 import '../../constants/hive_name.dart';
 import '../../data/repository/repository_hive/current_location_repository.dart';
+import '../widgets/loading_weather_widget.dart';
 import '../widgets/my_box_shadow_painter.dart';
 import '../widgets/success_weather_widget.dart';
 
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocBuilder<FiveDayWeatherCubit, FiveDayWeatherState>(
         builder: (context, state) {
           if (state is FiveDayWeatherSuccess) {
@@ -47,11 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fiveDayWeatherData: fiveDayWeatherData,
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.deepOrange,
-              ),
-            );
+            return LoadingWeatherWidget();
           }
         },
       ),
